@@ -1,0 +1,36 @@
+{
+  "id": "pbo-tuner",
+  "name": "PBO 精准调校 (SMU Debug)",
+  "version": "2.0.0",
+  "plugin_type": "tab",
+  "author": "linyuhc001",
+  "description": "仿 SMUDebugTool 的 AMD Ryzen PBO 精准调校中心。插件自带伴随服务，通过 PawnIO 内核驱动直连 SMU（RSMU mailbox），支持每核 Curve Optimizer 降压、全核 CO、PBO Scalar、FMax 睿频上限调整与 SMU 版本/PM 表读取。所有参数直接作用于处理器固件，无需进入 BIOS，也不依赖宿主源码。",
+  "entry": "index.html",
+  "min_host_version": "0.9.7",
+  "permissions": [
+    "hardware:tuning",
+    "power:control"
+  ],
+  "service": {
+    "executable": "sidecar/pbo-service.exe",
+    "args": [
+      "--serve",
+      "--port",
+      "19110"
+    ],
+    "elevated": true,
+    "auto_start": true,
+    "auto_stop": true,
+    "port": 19110,
+    "health_url": "http://127.0.0.1:19110/api/health"
+  },
+  "window": {
+    "width": 1024,
+    "height": 720,
+    "resizable": true,
+    "decorations": true,
+    "transparent": false,
+    "always_on_top": false,
+    "skip_taskbar": false
+  }
+}
